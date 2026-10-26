@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rúbrica ECOE · Sepsis por artritis séptica</title>
+<style>
+:root{--bg:#f4f7f8;--card:#fff;--ink:#14272e;--mute:#5b6f77;--line:#d3dde1;--acc:#0b6e7f;--accbg:#dff0f3;--ok:#1d7a4a;--warn:#b26a00;--bad:#b3261e;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1c21;--card:#17282f;--ink:#e6eff2;--mute:#9bb0b8;--line:#2b414a;--acc:#5cc3d6;--accbg:#1b3b45;--ok:#5fd394;--warn:#f0b050;--bad:#ff8a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1c21;--card:#17282f;--ink:#e6eff2;--mute:#9bb0b8;--line:#2b414a;--acc:#5cc3d6;--accbg:#1b3b45;--ok:#5fd394;--warn:#f0b050;--bad:#ff8a80;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:20px 16px 40px}
+h1{font:700 1.5rem/1.2 Georgia,"Times New Roman",serif;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px;font-size:.95rem}
+.case{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:.92rem}
+.case b{font-weight:600}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+label.f{display:flex;flex-direction:column;font-size:.85rem;color:var(--mute);gap:4px}
+input[type=text],input[type=email],input[type=number],textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+textarea{min-height:80px;resize:vertical}
+.crit{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+.crit h2{font:600 1.1rem/1.3 Georgia,serif;margin:0 0 2px}
+.w{font-size:.82rem;color:var(--mute);display:flex;align-items:center;gap:6px;margin:0 0 10px}
+.w input{width:64px;padding:3px 6px}
+.chk{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:4px 12px;margin:0 0 12px;padding:10px;background:var(--bg);border-radius:8px;font-size:.9rem}
+.chk legend{font-size:.82rem;color:var(--mute);padding:0 4px}
+.chk label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.chk input{margin-top:4px;accent-color:var(--acc)}
+.sug{font-size:.88rem;color:var(--acc);margin:-4px 0 10px;min-height:1.3em}
+.lv{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.lv button{font:inherit;text-align:left;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:8px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-height:100%}
+.lv button:hover{border-color:var(--acc)}
+.lv button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.lv button[aria-pressed=true]{border-color:var(--acc);background:var(--accbg)}
+.lv strong{font-size:.9rem}
+.lv span{font-size:.8rem;color:var(--mute);line-height:1.35}
+.lv button[aria-pressed=true] span{color:var(--ink)}
+.res{position:sticky;bottom:0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:16px;flex-wrap:wrap;box-shadow:0 -4px 14px rgba(0,0,0,.08)}
+.big{font:700 2.6rem/1 Georgia,serif}
+.big small{font-size:1rem;color:var(--mute);font-weight:400}
+.band{font-weight:600}
+.det{flex:1;min-width:200px;font-size:.85rem;color:var(--mute)}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s}
+.btns{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.btns button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.btns button:focus-visible{outline:3px solid var(--acc)}
+.note{font-size:.82rem;color:var(--mute);margin-top:14px}
+@media (max-width:760px){.lv{grid-template-columns:1fr}.lv button{flex-direction:row;gap:10px}.fields{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Rúbrica ECOE: sepsis por artritis séptica</h1>
+<p class="sub">Pediatría · Simulación clínica · Medicina, décimo semestre · Nota de 0,0 a 5,0</p>
+
+<div class="case"><b>Caso:</b> niño de 7 años, 25 kg, febril, somnoliento, con taquipnea, frialdad distal y piel moteada. FC 144, TA 82/52, FR 28, SpO₂ 84 %, T 38,5 °C, crépitos bilaterales y lesión en tobillo derecho. <b>Diagnóstico esperado:</b> choque séptico por artritis séptica de tobillo derecho y neumonía.</div>
+
+<div class="fields">
+<label class="f">Estudiante / pareja<input type="text" id="est" placeholder="Nombre"></label>
+<label class="f">Evaluador<input type="text" id="eva" placeholder="Nombre"></label>
+</div>
+<div class="fields">
+<label class="f">ID del script de Google (Apps Script)<input type="text" id="sid" placeholder="Pega aquí el ID del script" autocomplete="off" spellcheck="false"></label>
+<label class="f">ID de la hoja de cálculo (Google Sheet)<input type="text" id="shid" placeholder="Pega aquí el ID de la hoja" autocomplete="off" spellcheck="false"></label>
+</div>
+
+<div class="fields">
+<label class="f">Correo del estudiante (copia)<input type="email" id="mest" placeholder="estudiante@correo.com" autocomplete="off" spellcheck="false"></label>
+<label class="f">Correo del evaluador (copia)<input type="email" id="meva" placeholder="evaluador@correo.com" autocomplete="off" spellcheck="false"></label>
+</div>
+
+<div id="crits"></div>
+
+<label class="f">Observaciones<textarea id="obs" placeholder="Retroalimentación para el estudiante"></textarea></label>
+
+<div class="btns">
+<button id="send" style="background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600">Enviar y registrar</button>
+<button id="mail">Redactar correo</button>
+<button id="copy">Copiar resumen</button>
+<button id="reset">Reiniciar</button>
+</div>
+<p id="msg" role="status" style="margin:10px 0 0;font-size:.9rem;min-height:1.3em"></p>
+<p class="note">Cálculo: cada criterio se puntúa de 0 a 4 y la nota es la suma ponderada del porcentaje logrado × 5. Con pesos iguales, cada criterio aporta 1,67 puntos. Se aprueba con 3,0 o más. Los pesos se pueden ajustar y deben sumar 100.</p>
+</main>
+
+<div style="position:sticky;bottom:0;max-width:920px;margin:0 auto;padding:0 16px 8px">
+<div class="res" aria-live="polite">
+<div class="big"><span id="nota">0,0</span> <small>/ 5,0</small></div>
+<div><div class="band" id="band">Sin evaluar</div><div id="prog" style="font-size:.85rem;color:var(--mute)">0 de 3 criterios</div></div>
+<div class="det"><div id="det"></div><div class="bar"><i id="barfill"></i></div></div>
+</div>
+</div>
+
+<script>
+var LEVELS=["No realiza","Deficiente","Insuficiente","Bueno","Excelente"];
+var C=[
+{t:"Establece diagnóstico adecuado",w:34,
+ d:["No establece ningún diagnóstico y no hay intento de aproximación.","No establece ningún diagnóstico.","Establece sepsis o cuadro respiratorio.","Establece solo 1 de los diagnósticos: choque séptico o neumonía.","Establece el diagnóstico de choque séptico y neumonía."],
+ ch:["Sepsis / choque séptico","Neumonía","Foco articular: artritis séptica de tobillo derecho"],
+ sug:function(n,a){return a[0]&&a[1]?4:(a[0]||a[1])?3:(n>0?2:null)}},
+{t:"Indicaciones de manejo inicial",w:33,
+ d:["No indica ninguna conducta.","No establece ningún manejo inicial o manejo inadecuado.","Establece manejo insuficiente.","Establece manejo parcial.","Establece el manejo completo del paciente, incluida la remisión."],
+ ch:["Bolo de lactato Ringer 20 cc/kg (500 cc)","O₂ con máscara de no reinhalación, FiO₂ 100 %","Cefazolina (850 mg) u oxacilina (1,2 g)","Clindamicina, dosis inicial 340 mg","Líquidos de mantenimiento (≈ 65 cc/h)","Remisión a tercer nivel"],
+ sug:function(n,a){return n===6?4:n>=4?3:n>=2?2:n>=1?1:null}},
+{t:"Solicitud y análisis de ayudas diagnósticas",w:33,
+ d:["No solicita ni analiza ayudas.","No solicita ayudas diagnósticas o las solicitadas no corresponden con el manejo del paciente.","Solicita las ayudas, pero no las analiza o las analiza de manera errada.","Solicita las ayudas y analiza parcialmente.","Solicita y analiza correctamente las ayudas diagnósticas pertinentes."],
+ ch:["Hemograma (leucocitosis 23.500, neutrofilia, bandas 5 %)","VSG elevada (58)","Radiografía de tórax","Electrolitos (Na 143, K 4,5)"],
+ sug:function(n,a){return n>=3?3:n>=1?2:null}}
+];
+var st=C.map(function(){return {lv:null,ck:[]}});
+var root=document.getElementById("crits");
+function $(i){return document.getElementById(i)}
+function fmt(x){return x.toFixed(1).replace(".",",")}
+function build(){
+ root.innerHTML="";
+ C.forEach(function(c,i){
+  var s=document.createElement("section");s.className="crit";
+  var h='<h2>'+c.t+'</h2><p class="w">Peso <input type="number" min="0" max="100" value="'+c.w+'" data-w="'+i+'" aria-label="Peso de '+c.t+'"> %</p>';
+  h+='<fieldset class="chk" style="border:0"><legend>Lista de apoyo (opcional)</legend>';
+  c.ch.forEach(function(x,j){h+='<label><input type="checkbox" data-c="'+i+'" data-j="'+j+'"> '+x+'</label>'});
+  h+='</fieldset><div class="sug" id="sug'+i+'"></div><div class="lv">';
+  for(var l=0;l<5;l++){h+='<button type="button" aria-pressed="false" data-i="'+i+'" data-l="'+l+'"><strong>'+l+' · '+LEVELS[l]+'</strong><span>'+c.d[l]+'</span></button>'}
+  s.innerHTML=h+'</div>';root.appendChild(s);
+ });
+}
+function weights(){
+ var w=[].map.call(document.querySelectorAll("[data-w]"),function(e){return Math.max(0,parseFloat(e.value)||0)});
+ var t=w.reduce(function(a,b){return a+b},0);
+ return {w:w,t:t};
+}
+function calc(){
+ var W=weights(),done=0,sum=0;
+ st.forEach(function(s,i){if(s.lv!==null){done++;sum+=(s.lv/4)*W.w[i]}});
+ var nota=W.t>0?(sum/W.t)*5:0;
+ $("nota").textContent=fmt(nota);
+ $("prog").textContent=done+" de 3 criterios";
+ var b=done<3?"Evaluación incompleta":nota>=4.5?"Sobresaliente":nota>=4?"Bueno":nota>=3?"Aprobado":nota>=2?"Insuficiente":"Deficiente";
+ var el=$("band");el.textContent=b;
+ el.style.color=done<3?"":nota>=3?"var(--ok)":"var(--bad)";
+ $("barfill").style.width=(nota/5*100)+"%";
+ $("det").textContent=W.t===100?C.map(function(c,i){return (st[i].lv===null?"–":st[i].lv)+"/4"}).join("  ·  "):"Los pesos suman "+W.t+" %; se normalizan para el cálculo.";
+ document.querySelectorAll(".lv button").forEach(function(b){b.setAttribute("aria-pressed",st[b.dataset.i].lv===+b.dataset.l)});
+ return nota;
+}
+function sugg(i){
+ var a=st[i].ck,n=a.filter(Boolean).length,v=C[i].sug(n,a),e=$("sug"+i);
+ e.textContent=v===null?"":"Sugerencia según la lista: nivel "+v+" · "+LEVELS[v];
+}
+root.addEventListener("click",function(e){
+ var b=e.target.closest("button[data-l]");if(!b)return;
+ st[b.dataset.i].lv=+b.dataset.l;calc();
+});
+root.addEventListener("change",function(e){
+ var t=e.target;
+ if(t.dataset.c!==undefined){var i=+t.dataset.c;st[i].ck[+t.dataset.j]=t.checked;sugg(i)}
+ if(t.dataset.w!==undefined)calc();
+});
+root.addEventListener("input",function(e){if(e.target.dataset.w!==undefined)calc()});
+$("reset").onclick=function(){st=C.map(function(){return {lv:null,ck:[]}});build();$("est").value="";$("mest").value="";$("obs").value="";calc()};
+$("copy").onclick=function(){
+ var n=calc(),t="ECOE sepsis por artritis séptica\nEstudiante: "+$("est").value+" <"+$("mest").value+">\nEvaluador: "+$("eva").value+" <"+$("meva").value+">\nID script: "+$("sid").value+"\nID hoja: "+$("shid").value+"\n";
+ C.forEach(function(c,i){t+=c.t+": "+(st[i].lv===null?"sin puntuar":st[i].lv+"/4 ("+LEVELS[st[i].lv]+")")+"\n"});
+ t+="NOTA: "+fmt(n)+" / 5,0\nObservaciones: "+$("obs").value;
+ var done=function(){$("copy").textContent="Resumen copiado";setTimeout(function(){$("copy").textContent="Copiar resumen"},1800)};
+ try{navigator.clipboard.writeText(t).then(done,function(){prompt("Copia el resumen:",t)})}catch(x){prompt("Copia el resumen:",t)}
+};
+var DEF={sid:"AKfycbybUcOnsn3Ssk_tK7k8sV6lK9Sla_WxZcHiulwHlkiqLl1GGTUV3XmF33lv-pq8A_uo",shid:"11O_NB3MfYHaF43jH7FWhUQJ6-YSwKbBiAJ4-vl0E9t4"};
+["sid","shid","meva"].forEach(function(k){if(DEF[k])$(k).value=DEF[k];try{var v=localStorage.getItem("ecoe_"+k);if(v&&!DEF[k])$(k).value=v}catch(x){}$(k).addEventListener("input",function(){try{localStorage.setItem("ecoe_"+k,$(k).value)}catch(x){}})});
+function datos(){
+ var W=weights();
+ return {estudiante:$("est").value.trim(),correoEstudiante:$("mest").value.trim(),evaluador:$("eva").value.trim(),correoEvaluador:$("meva").value.trim(),sheetId:$("shid").value.trim(),observaciones:$("obs").value,
+  criterios:C.map(function(c,i){return {nombre:c.t,nivel:st[i].lv,peso:W.w[i]}})};
+}
+function msg(t,c){var m=$("msg");m.textContent=t;m.style.color=c||"var(--mute)"}
+function validar(){
+ var d=datos();
+ if(st.some(function(s){return s.lv===null})){msg("Puntúa los tres criterios antes de enviar.","var(--bad)");return null}
+ if(!d.estudiante){msg("Escribe el nombre del estudiante.","var(--bad)");return null}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.correoEstudiante)){msg("Escribe un correo válido para el estudiante.","var(--bad)");return null}
+ return d;
+}
+$("send").onclick=function(){
+ var d=validar();if(!d)return;
+ var id=$("sid").value.trim();
+ var url=/^https:\/\/script\.google\.com\//.test(id)?id:"https://script.google.com/macros/s/"+id+"/exec";
+ if(!id){msg("Pega el ID de la implementación del script.","var(--bad)");return}
+ var b=$("send");b.disabled=true;msg("Enviando…");
+ fetch(url,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(d)})
+ .then(function(){msg("Solicitud enviada. Revisa la hoja y el correo del estudiante para confirmar el registro.","var(--ok)")})
+ .catch(function(){msg("No se pudo conectar con el script. Si abriste esta rúbrica desde el enlace publicado, el navegador bloquea el envío: usa la versión descargada o “Redactar correo”.","var(--bad)")})
+ .then(function(){b.disabled=false});
+};
+$("mail").onclick=function(){
+ var d=validar();if(!d)return;
+ var n=calc(),t="Resultado ECOE · Sepsis por artritis séptica\n\nEstudiante: "+d.estudiante+"\nEvaluador: "+d.evaluador+"\n\n";
+ C.forEach(function(c,i){t+=c.t+": "+st[i].lv+"/4 ("+LEVELS[st[i].lv]+")\n"});
+ t+="\nNOTA: "+fmt(n)+" / 5,0\n\nObservaciones: "+d.observaciones;
+ var l="mailto:"+encodeURIComponent(d.correoEstudiante)+"?subject="+encodeURIComponent("Resultado ECOE · Sepsis por artritis séptica")+(d.correoEvaluador?"&cc="+encodeURIComponent(d.correoEvaluador):"")+"&body="+encodeURIComponent(t);
+ msg("Abriendo tu programa de correo…");
+ window.location.href=l;
+};
+
+build();calc();
+</script>
+</body>
+</html>
